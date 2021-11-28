@@ -11,3 +11,5 @@ The background is a plain CSS pattern from [CSS3 Pattern Gallery](https://projec
 ----
 **Notice** <br>
 If you try to divide by zero you will get an error message before you click the *equals* button. In case you want to divide by a decimal number that starts with zero, use the dot instead. 
+
+![calculator UI](calculator-ui.png)
