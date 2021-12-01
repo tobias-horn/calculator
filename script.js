@@ -113,7 +113,7 @@ const currentOperandTextElement = document.querySelector("[data-current-operand]
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
 
 
-// event listeners
+// event listeners for keyboard navigation 
 
 numberButtons.forEach(button => {
     button.addEventListener("click", () => {
@@ -121,6 +121,65 @@ numberButtons.forEach(button => {
         calculator.updateDisplay()
     } )
 })
+
+document.onkeydown = function (e) {
+    let temp = e.key
+    console.log(temp.charCodeAt(0))
+    if (temp.charCodeAt(0) >= 48 && temp.charCodeAt(0) <= 57) {
+        calculator.appendNumber(parseInt(e.key))
+        calculator.updateDisplay()
+    }
+
+    if (temp.charCodeAt(0) === 47 || temp.charCodeAt(0) === 43 || temp.charCodeAt(0) === 42 || temp.charCodeAt(0) === 45) {
+        calculator.chooseOperation(e.key)
+        calculator.updateDisplay()
+        console.log("ope")
+    }
+
+    if (temp.charCodeAt(0) === 69) {
+        calculator.compute()
+        calculator.updateDisplay()
+    }
+
+    if (temp.charCodeAt(0) === 66) {
+        calculator.delete()
+        calculator.updateDisplay()
+    }
+}
+
+// event listener for CMD + Backspace for a clear 
+
+    let keys = {
+        b: false,
+        m: false,
+      };
+  
+      addEventListener("keydown", (event) => {
+        if (event.key === "Meta") {
+          keys.m = true;
+        }
+        if (event.key === "Backspace") {
+          keys.b = true;
+        }
+  
+      if(keys.m && keys.b){
+
+        calculator.clear()
+        calculator.updateDisplay()
+      }
+  
+      });
+  
+      addEventListener("keyup", (event) => {
+        if (event.key === "Meta") {
+          keys.m = false;
+        }
+        if (event.key === "Backspace") {
+          keys.b = false;
+        }
+      });
+
+// event listeners for button control
 
 operationButtons.forEach(button => {
     button.addEventListener("click", () => {
@@ -143,3 +202,4 @@ deleteButton.addEventListener("click", button => {
     calculator.delete()
     calculator.updateDisplay()
 })
+
